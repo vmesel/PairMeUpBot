@@ -6,7 +6,7 @@ authors = ["Vinicius Mesel <bioinfo.vinicius@gmail.com>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "3.10.5"
 python-decouple = "^3.6"
 "discord.py" = "^1.7.3"
 shortuuid = "^1.0.9"
