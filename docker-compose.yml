@@ -1,0 +1,10 @@
+version: '3.3'
+services:
+  bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: discord_bot
+    container_name: discord_bot
+    env_file:
+      - .env
