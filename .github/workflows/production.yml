@@ -1,4 +1,4 @@
-name: Push Container to Heroku
+name: Development workflow
 
 on:
   push:
@@ -6,22 +6,15 @@ on:
       - main
 
 jobs:
-  build:
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-      - name: Updating Ubuntu system and Heroku
-        env: 
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: sudo apt update && sudo snap install heroku --classic
-      - name: Checking the info
-        run: neofetch
+  deploy:
+    runs-on: ubuntu-latest
 
-      - uses: akhileshns/heroku-deploy@v3.8.8
+    steps:
+      - name: Development Code
+        uses: actions/checkout@v2
+      - name: Deploy to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
         with:
-          heroku_email: ${{secrets.HEROKU_EMAIL}}
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: pairmeupbot
-          branch: HEAD
-          useforce: false
-          dynamicFiles: false
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: 'pairmeupbot'
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
