@@ -41,8 +41,11 @@ def check_if_valid_pair(member, ctx):
     if member.status != discord.Status.online:
         return False
     
-    if member.name in GROUPS[ctx.author.name]:
-        return False
+    try:
+        if member.name in GROUPS[ctx.author.name]:
+            return False
+    except:
+        pass
 
     return True
 
