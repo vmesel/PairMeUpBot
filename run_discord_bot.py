@@ -19,6 +19,7 @@ intents.presences = True
 
 bot = commands.Bot(command_prefix="!", intents=intents)
 
+GROUPS = {}
 
 @bot.command()
 @commands.has_permissions(manage_guild=True)
@@ -38,6 +39,9 @@ def check_if_valid_pair(member, ctx):
         return False
 
     if member.status != discord.Status.online:
+        return False
+    
+    if member.name in GROUPS[ctx.author.name]:
         return False
 
     return True
@@ -89,6 +93,9 @@ async def pair(ctx, *args):
     await channel.send("Welcome to your new pair!")
     await ctx.author.send(invite_link)
     await other_pair_channel.send(invite_link)
+    if not ctx.author.name in GROUPS:
+        GROUPS[ctx.author.name] = []
+    GROUPS[ctx.author.name].append(other_pair.name)
     logging.info(f"{ctx.author.name} created a pair with {other_pair.name} - #{new_pair}")
 
 
