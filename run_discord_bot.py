@@ -38,7 +38,7 @@ def check_if_valid_pair(member, ctx):
     if member.name == "pairmeup_bot" or member == ctx.author:
         return False
 
-    if member.status != discord.Status.online:
+    if member.status == discord.Status.offline:
         return False
     
     try:
